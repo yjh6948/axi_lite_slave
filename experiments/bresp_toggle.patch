@@ -1,0 +1,11 @@
+--- a/rtl/axi_lite_slave.v
++++ b/rtl/axi_lite_slave.v
+@@ -144,6 +144,8 @@
+                 s_axi_bresp  <= aw_in_range ? RESP_OKAY : RESP_SLVERR;
+             end else if (s_axi_bvalid && s_axi_bready) begin
+                 s_axi_bvalid <= 1'b0;
++            end else if (s_axi_bvalid && !s_axi_bready) begin
++                s_axi_bresp  <= ~s_axi_bresp;
+             end
+         end
+     end
